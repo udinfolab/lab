@@ -1,0 +1,11 @@
+*.o
+*.a
+*.log
+*.swp
+*.cmake
+
+Makefile
+
+CMakeFiles/
+
+CMakeCache.txt
