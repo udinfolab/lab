@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
   po::notify(vm);
 
   if (vm.count("help")) {
-    std::cout << desc << "\n";
+    std::clog << desc << "\n";
     return 1;
   }
 
@@ -107,8 +107,8 @@ int main(int argc, char **argv) {
       ++cnt;
       // Read stream_item from stdin
       stream_item.read(protocolInput.get());
-      //std::cout << stream_item.stream_id << " clean_visible size: ";
-      //std::cout << stream_item.body.clean_visible.size() << std::endl;
+      //std::clog << stream_item.stream_id << " clean_visible size: ";
+      //std::clog << stream_item.body.clean_visible.size() << std::endl;
 
       std::string doc = stream_item.body.clean_visible;
       // skip empty documents
@@ -126,6 +126,7 @@ int main(int argc, char **argv) {
           // TODO save the document into the output stream
           std::clog << "Matched: [" << stream_item.stream_id << "] ";
           std::clog << "(" << *first << ")" << std::endl;
+          stream_item.write(protocolOutput.get());
           ++matched;
         }
         ++first;
@@ -179,7 +180,7 @@ int load_query(){
     std::string qent = ::url2ent(url);
     g_qent_map[url] = qent;
     // verbose output
-    std::cout << "Query #" << ++index << " [" << qent << "]" << std::endl;
+    std::clog << "Query #" << ++index << " [" << qent << "]" << std::endl;
   }
   return 0;
 }
