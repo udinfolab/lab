@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 
+#include <boost/regex.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
@@ -43,8 +44,11 @@ const char QUERY_FILE[] = "query/query.txt";
 const int QUERY_NUM = 170;
 
 // function declaration
-int load_query(std::vector<std::string> & query_vec);
-std::string url2ent(std::string & url);
+int load_query(std::vector<std::string>& query_vec);
+std::string url2ent(std::string& url);
+std::string& trim(std::string& str);
+std::string url_encode(const std::string& url);
+std::string url_decode(const std::string& in);
 
 int main(int argc, char **argv) {
   std::vector<std::string> query_vec;
@@ -124,7 +128,7 @@ int load_query(std::vector<std::string> & query_vec){
       break;
     }
     std::string query = ::url2ent(url);
-    std::cout << "Query #" << ++index << " " << query << std::endl;
+    std::cout << "Query #" << ++index << " [" << query << "]" << std::endl;
     query_vec.push_back(query);
   }
   return 0;
@@ -136,10 +140,49 @@ int load_query(std::vector<std::string> & query_vec){
 std::string url2ent(std::string & url){
   // split the string
   // http://stackoverflow.com/a/236976
-
   std::vector<std::string> strs;
   boost::split(strs, url, boost::is_any_of("/"));
   std::string ent = strs.back();
+  ent = ::url_decode(ent);
+  ent = ::trim(ent);
   return ent;
+}
+
+/*
+ * trim the string using boost::regex
+ */
+std::string & trim(std::string & str){
+  // clean up terms in parentheses
+  const boost::regex rm_paren_e("\\_\\(\\w+\\)");
+  const std::string non_format("");
+  str = boost::regex_replace(str, rm_paren_e, non_format, 
+      boost::match_default | boost::format_sed);
+  
+  // clean up non-word characters, here \W is equivalent to [^[:word:]]
+  const boost::regex clean_e("[\\W\\_]+");
+  const std::string space_format(" ");
+  str = boost::regex_replace(str, clean_e, space_format, 
+      boost::match_default | boost::format_sed);
+
+  // remove extra-spaces
+  const boost::regex extra_space_e("\\s+");
+  str = boost::regex_replace(str, clean_e, space_format, 
+      boost::match_default | boost::format_sed);
+
+  // remove leading spaces
+  const boost::regex lead_space_e("^\\s+");
+  str = boost::regex_replace(str, lead_space_e, non_format, 
+      boost::match_default | boost::format_sed);
+
+  // remove trailing spaces
+  const boost::regex trail_space_e("\\s+$");
+  str = boost::regex_replace(str, trail_space_e, non_format, 
+      boost::match_default | boost::format_sed);
+
+  // to lowercase, in STL style
+  // Thanks to http://stackoverflow.com/a/313990/219617
+  std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+
+  return str;
 }
 

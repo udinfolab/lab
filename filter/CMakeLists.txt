@@ -15,8 +15,8 @@ include_directories(${FILTER_SOURCE_DIR}/streamcorpus)
 # make sure linker can find the streamcorpus library
 link_directories(${FILTER_BINARY_DIR}/streamcorpus)
 
-add_executable(filter filter.cpp)
+add_executable(filter filter.cpp url_code.cpp)
 
 # link the executable to the streamcorpus library
 target_link_libraries(filter streamcorpus thrift boost_filesystem
-  boost_program_options boost_system)
+  boost_program_options boost_system boost_regex)
