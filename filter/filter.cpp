@@ -1,3 +1,14 @@
+/*
+ * Apply thrift streaming filtering with query entities and their alternative
+ * names.
+ *
+ * Thanks to:
+ * https://groups.google.com/d/msg/streamcorpus/fi8Y8yseF8o/viJjiFNVLNsJ
+ *
+ * Streaming corpus is passed in through stdin, and filtered corpus is passed
+ * out through stdout
+ */
+
 #include <inttypes.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -104,9 +115,9 @@ int main(int argc, char **argv) {
 
   while (true) {
     try {
-      ++cnt;
       // Read stream_item from stdin
       stream_item.read(protocolInput.get());
+      ++cnt;
       //std::clog << stream_item.stream_id << " clean_visible size: ";
       //std::clog << stream_item.body.clean_visible.size() << std::endl;
 
@@ -128,6 +139,7 @@ int main(int argc, char **argv) {
           std::clog << "(" << *first << ")" << std::endl;
           stream_item.write(protocolOutput.get());
           ++matched;
+          break;
         }
         ++first;
       }
@@ -147,6 +159,9 @@ int main(int argc, char **argv) {
  * query
  */
 bool is_relevant(const std::string& query, const std::string& doc){
+  // for DEBUG ONLY
+  return true;
+
   if(g_qent_map.end() == g_qent_map.find(query)){
     return false;
   }
