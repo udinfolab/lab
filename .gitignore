@@ -6,6 +6,7 @@
 
 CMakeFiles/
 bin/
+tmp/
 
 corpus
 Makefile
