@@ -4,8 +4,9 @@
 *.swp
 *.cmake
 
-Makefile
-
 CMakeFiles/
+bin/
 
+corpus
+Makefile
 CMakeCache.txt

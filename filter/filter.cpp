@@ -4,16 +4,20 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <netinet/in.h>
-#include <iostream>
 #include <cstdio>
 #include <time.h>
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
 #include <boost/unordered_map.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
-#include <fstream>
-
-#include "streamcorpus_types.h"
-#include "streamcorpus_constants.h"
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/path.hpp>
+#include <boost/program_options.hpp>
 
 #include <protocol/TBinaryProtocol.h>
 #include <protocol/TDenseProtocol.h>
@@ -22,9 +26,8 @@
 #include <transport/TFDTransport.h>
 #include <transport/TFileTransport.h>
 
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/path.hpp>
-#include <boost/program_options.hpp>
+#include "streamcorpus_types.h"
+#include "streamcorpus_constants.h"
 
 //using namespace boost;
 using namespace apache::thrift;
@@ -33,9 +36,21 @@ using namespace apache::thrift::transport;
 
 namespace po = boost::program_options;
 
-using namespace streamcorpus;
+//using namespace streamcorpus;
+
+// global constant variables
+const char QUERY_FILE[] = "query/query.txt";
+const int QUERY_NUM = 170;
+
+// function declaration
+int load_query(std::vector<std::string> & query_vec);
+std::string url2ent(std::string & url);
 
 int main(int argc, char **argv) {
+  std::vector<std::string> query_vec;
+  query_vec.reserve(QUERY_NUM);
+  ::load_query(query_vec);
+
   std::clog << "Starting program" << std:: endl;
   bool negate(false);
 
@@ -71,7 +86,7 @@ int main(int argc, char **argv) {
   transportOutput->open();
 
   // Read and process all stream items
-  StreamItem stream_item;
+  streamcorpus::StreamItem stream_item;
   int cnt=0;
 
   while (true) {
@@ -90,5 +105,41 @@ int main(int argc, char **argv) {
     }
   }
   return 0;
+}
+
+int load_query(std::vector<std::string> & query_vec){
+  std::ifstream query_file(QUERY_FILE);
+  if(false == query_file.is_open()){
+    std::cerr << "Failed to load query file: " << QUERY_FILE << std::endl;
+    exit(-1);
+  }
+
+  std::string line;
+  int index = 0;
+  while(std::getline(query_file, line)){
+    std::istringstream iss(line);
+    std::string url;
+    if (!(iss >> url)){
+      std::cerr << "Error when parsing query file: " << QUERY_FILE << std::endl;
+      break;
+    }
+    std::string query = ::url2ent(url);
+    std::cout << "Query #" << ++index << " " << query << std::endl;
+    query_vec.push_back(query);
+  }
+  return 0;
+}
+
+/*
+ * Parse URL and extract the entity name
+ */
+std::string url2ent(std::string & url){
+  // split the string
+  // http://stackoverflow.com/a/236976
+
+  std::vector<std::string> strs;
+  boost::split(strs, url, boost::is_any_of("/"));
+  std::string ent = strs.back();
+  return ent;
 }
 
