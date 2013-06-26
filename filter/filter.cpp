@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 #include <string>
 
 #include <boost/regex.hpp>
@@ -40,20 +41,26 @@ namespace po = boost::program_options;
 //using namespace streamcorpus;
 
 // global constant variables
-const char QUERY_FILE[] = "query/query.txt";
+const char QUERY_FILE[] = "query/simple.txt";
 const int QUERY_NUM = 170;
 
+// original query list
+std::vector<std::string> g_query_vec;
+// query entity list
+std::map<std::string, std::string> g_qent_map;
+
 // function declaration
-int load_query(std::vector<std::string>& query_vec);
+int load_query();
 std::string url2ent(std::string& url);
 std::string& trim(std::string& str);
 std::string url_encode(const std::string& url);
 std::string url_decode(const std::string& in);
+bool is_relevant(const std::string& query, const std::string& doc);
 
 int main(int argc, char **argv) {
-  std::vector<std::string> query_vec;
-  query_vec.reserve(QUERY_NUM);
-  ::load_query(query_vec);
+  // load the query
+  g_query_vec.reserve(QUERY_NUM);
+  ::load_query();
 
   std::clog << "Starting program" << std:: endl;
   bool negate(false);
@@ -86,32 +93,71 @@ int main(int argc, char **argv) {
 
   // initialize output stream
   boost::shared_ptr<TFDTransport> transportOutput(new TFDTransport(output_fd));
-  boost::shared_ptr<TBinaryProtocol> protocolOutput(new TBinaryProtocol(transportOutput));
+  boost::shared_ptr<TBinaryProtocol> protocolOutput(
+      new TBinaryProtocol(transportOutput));
   transportOutput->open();
 
   // Read and process all stream items
   streamcorpus::StreamItem stream_item;
-  int cnt=0;
+  int cnt = 0;
+  int matched = 0;
 
   while (true) {
     try {
+      ++cnt;
       // Read stream_item from stdin
       stream_item.read(protocolInput.get());
-      std::cout << stream_item.stream_id << " clean_visible size: ";
-      std::cout << stream_item.body.clean_visible.size() << std::endl;
-      ++cnt;
-    }
-    catch (TTransportException e) {
+      //std::cout << stream_item.stream_id << " clean_visible size: ";
+      //std::cout << stream_item.body.clean_visible.size() << std::endl;
+
+      std::string doc = stream_item.body.clean_visible;
+      // skip empty documents
+      if(0 == doc.size()){
+        continue;
+      }
+      // apply trimming
+      ::trim(doc);
+
+      // search over all the query entities
+      std::vector<std::string>::iterator first = g_query_vec.begin();
+      std::vector<std::string>::iterator last = g_query_vec.end();
+      while(first != last){
+        if(is_relevant(*first, doc)){
+          // TODO save the document into the output stream
+          std::clog << "Matched: [" << stream_item.stream_id << "] ";
+          std::clog << "(" << *first << ")" << std::endl;
+          ++matched;
+        }
+        ++first;
+      }
+    } catch (TTransportException e) {
       // Vital to flush the buffered output or you will lose the last one
       transportOutput->flush();
       std::clog << "Total stream items processed: " << cnt << std::endl;
+      std::clog << "Total stream items matched: " << matched << std::endl;
       break;
     }
   }
   return 0;
 }
 
-int load_query(std::vector<std::string> & query_vec){
+/*
+ * Given a query and string, judge whether the document is relevant w.r.t. the
+ * query
+ */
+bool is_relevant(const std::string& query, const std::string& doc){
+  if(g_qent_map.end() == g_qent_map.find(query)){
+    return false;
+  }
+  std::string qent = g_qent_map[query];
+  if(std::string::npos != doc.find(qent)){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+int load_query(){
   std::ifstream query_file(QUERY_FILE);
   if(false == query_file.is_open()){
     std::cerr << "Failed to load query file: " << QUERY_FILE << std::endl;
@@ -127,9 +173,13 @@ int load_query(std::vector<std::string> & query_vec){
       std::cerr << "Error when parsing query file: " << QUERY_FILE << std::endl;
       break;
     }
-    std::string query = ::url2ent(url);
-    std::cout << "Query #" << ++index << " [" << query << "]" << std::endl;
-    query_vec.push_back(query);
+    g_query_vec.push_back(url);
+
+    // extract the query entity
+    std::string qent = ::url2ent(url);
+    g_qent_map[url] = qent;
+    // verbose output
+    std::cout << "Query #" << ++index << " [" << qent << "]" << std::endl;
   }
   return 0;
 }
@@ -144,7 +194,7 @@ std::string url2ent(std::string & url){
   boost::split(strs, url, boost::is_any_of("/"));
   std::string ent = strs.back();
   ent = ::url_decode(ent);
-  ent = ::trim(ent);
+  ::trim(ent);
   return ent;
 }
 
@@ -182,6 +232,10 @@ std::string & trim(std::string & str){
   // to lowercase, in STL style
   // Thanks to http://stackoverflow.com/a/313990/219617
   std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+
+  // prepend and append a space respectively
+  str.insert(0, 1, ' ');
+  str.push_back(' ');
 
   return str;
 }
