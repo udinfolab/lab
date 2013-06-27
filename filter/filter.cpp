@@ -20,9 +20,12 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+
 #include <vector>
 #include <map>
-#include <string>
+#include <algorithm>
+#include <iterator>
 
 #include <boost/regex.hpp>
 #include <boost/unordered_map.hpp>
@@ -31,6 +34,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/program_options.hpp>
+#include <boost/algorithm/string/iter_find.hpp>
 
 #include <protocol/TBinaryProtocol.h>
 #include <protocol/TDenseProtocol.h>
@@ -53,15 +57,24 @@ namespace po = boost::program_options;
 
 // global constant variables
 const char QUERY_FILE[] = "query/simple.txt";
+//const char QUERY_FILE[] = "query/query.txt";
+const char ALT_NAME_FILE[] = "query/alt-name.txt";
 const int QUERY_NUM = 170;
+const char EMPTY_STR[] = "";
+const char NA_STR[] = "N/A";
+
+const bool VERBOSE = true;
 
 // original query list
 std::vector<std::string> g_query_vec;
 // query entity list
 std::map<std::string, std::string> g_qent_map;
+// query entity alternative name list
+std::map<std::string, std::vector<std::string> > g_alt_name_map;
 
 // function declaration
 int load_query();
+int load_alt_name();
 std::string url2ent(std::string& url);
 std::string& trim(std::string& str);
 std::string url_encode(const std::string& url);
@@ -72,10 +85,9 @@ int main(int argc, char **argv) {
   // load the query
   g_query_vec.reserve(QUERY_NUM);
   ::load_query();
+  ::load_alt_name();
 
-  std::clog << "Starting program" << std:: endl;
   bool negate(false);
-
   // Supported options.
   po::options_description desc("Allowed options");
   desc.add_options()("help,h", "help message");
@@ -118,8 +130,6 @@ int main(int argc, char **argv) {
       // Read stream_item from stdin
       stream_item.read(protocolInput.get());
       ++cnt;
-      //std::clog << stream_item.stream_id << " clean_visible size: ";
-      //std::clog << stream_item.body.clean_visible.size() << std::endl;
 
       std::string doc = stream_item.body.clean_visible;
       // skip empty documents
@@ -134,9 +144,11 @@ int main(int argc, char **argv) {
       std::vector<std::string>::iterator last = g_query_vec.end();
       while(first != last){
         if(is_relevant(*first, doc)){
-          // TODO save the document into the output stream
-          std::clog << "Matched: [" << stream_item.stream_id << "] ";
-          std::clog << "(" << *first << ")" << std::endl;
+          if(VERBOSE){
+            std::clog << "Matched: [" << stream_item.stream_id << "] ";
+            std::clog << "(" << *first << ")" << std::endl;
+          }
+          // save the document into the output stream
           stream_item.write(protocolOutput.get());
           ++matched;
           break;
@@ -160,16 +172,34 @@ int main(int argc, char **argv) {
  */
 bool is_relevant(const std::string& query, const std::string& doc){
   // for DEBUG ONLY
-  return true;
+  //return true;
 
   if(g_qent_map.end() == g_qent_map.find(query)){
+    std::cerr << "No qent found for query: " << query << std::endl;
     return false;
   }
   std::string qent = g_qent_map[query];
+
+  // use std::string::find() to do quick sub-string based search
   if(std::string::npos != doc.find(qent)){
     return true;
   }else{
-    return false;
+    // we then try to match its alternative name
+    if(g_alt_name_map.end() == g_alt_name_map.find(query)){
+      return false;
+    }
+    std::vector<std::string> alt_name_vec = g_alt_name_map[query];
+    //search over all alternative names
+    bool matched = false;
+    std::vector<std::string>::iterator first = alt_name_vec.begin();
+    std::vector<std::string>::iterator last = alt_name_vec.end();
+    while(first != last){
+      if(std::string::npos != doc.find(*first)){
+        matched = true;
+        break;
+      }
+    }
+    return matched;
   }
 }
 
@@ -180,22 +210,68 @@ int load_query(){
     exit(-1);
   }
 
-  std::string line;
+  std::string url;
   int index = 0;
-  while(std::getline(query_file, line)){
-    std::istringstream iss(line);
-    std::string url;
-    if (!(iss >> url)){
-      std::cerr << "Error when parsing query file: " << QUERY_FILE << std::endl;
-      break;
-    }
+  while(std::getline(query_file, url)){
     g_query_vec.push_back(url);
 
     // extract the query entity
     std::string qent = ::url2ent(url);
     g_qent_map[url] = qent;
+
     // verbose output
-    std::clog << "Query #" << ++index << " [" << qent << "]" << std::endl;
+    if(VERBOSE){
+      std::clog << "Query #" << ++index << " [" << qent << "]" << std::endl;
+    }
+  }
+  return 0;
+}
+
+int load_alt_name(){
+  std::ifstream alt_name_file(ALT_NAME_FILE);
+  if(false == alt_name_file.is_open()){
+    std::cerr << "Failed to load alt-name file: " << ALT_NAME_FILE << std::endl;
+    exit(-1);
+  }
+
+  std::string line;
+  while(std::getline(alt_name_file, line)){
+    // skip empty lines
+    if(0 == line.compare(EMPTY_STR)){
+      continue;
+    }
+
+    std::vector<std::string> strs;
+    //boost::split(strs, line, boost::is_any_of(" : "));
+    // Split by substring
+    // Thanks to http://stackoverflow.com/a/5710242/219617
+    boost::iter_split(strs, line, boost::first_finder(" : "));
+    if(2 != strs.size()){
+      std::cerr << "Invalid alternative name record: " << line << std::endl;
+      // dump strs
+      std::copy(strs.begin(), strs.end(), 
+          std::ostream_iterator<std::string>(std::cout, ","));
+      exit(-1); // zero error tolerance
+    }
+    std::string url = strs[0];
+    std::string alt_name = strs[1];
+
+    // skip those queries without any alternative name
+    if(0 == alt_name.compare(NA_STR)){
+      continue;
+    }
+
+    if(g_alt_name_map.end() == g_alt_name_map.find(url)){
+      g_alt_name_map[url] = std::vector<std::string>();
+    }
+    ::trim(alt_name);
+    g_alt_name_map[url].push_back(alt_name);
+
+    // verbose output
+    if(VERBOSE){
+      std::clog << "Alt Name" << " [" << url << "] -> [";
+      std::clog << alt_name << "]" << std::endl;
+    }
   }
   return 0;
 }
@@ -204,7 +280,7 @@ int load_query(){
  * Parse URL and extract the entity name
  */
 std::string url2ent(std::string & url){
-  // split the string
+  // split the url, and get the sub-string after tha last '/'
   // http://stackoverflow.com/a/236976
   std::vector<std::string> strs;
   boost::split(strs, url, boost::is_any_of("/"));
