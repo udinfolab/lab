@@ -58,12 +58,14 @@ namespace po = boost::program_options;
 // global constant variables
 const char QUERY_FILE[] = "query/simple.txt";
 //const char QUERY_FILE[] = "query/query.txt";
-const char ALT_NAME_FILE[] = "query/alt-name.txt";
+//const char ALT_NAME_FILE[] = "query/alt-name.txt";
+const char ALT_NAME_FILE[] = "query/simple-alt-name.txt";
 const int QUERY_NUM = 170;
 const char EMPTY_STR[] = "";
 const char NA_STR[] = "N/A";
 
 const bool VERBOSE = true;
+//const bool VERBOSE = false;
 
 // original query list
 std::vector<std::string> g_query_vec;
@@ -171,7 +173,7 @@ int main(int argc, char **argv) {
  * query
  */
 bool is_relevant(const std::string& query, const std::string& doc){
-  // for DEBUG ONLY
+  // DEBUG ONLY
   //return true;
 
   if(g_qent_map.end() == g_qent_map.find(query)){
@@ -198,6 +200,7 @@ bool is_relevant(const std::string& query, const std::string& doc){
         matched = true;
         break;
       }
+      ++first;
     }
     return matched;
   }
@@ -269,7 +272,7 @@ int load_alt_name(){
 
     // verbose output
     if(VERBOSE){
-      std::clog << "Alt Name" << " [" << url << "] -> [";
+      std::clog << "ALT-Name" << " [" << url << "] -> [";
       std::clog << alt_name << "]" << std::endl;
     }
   }
