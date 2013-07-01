@@ -56,10 +56,10 @@ namespace po = boost::program_options;
 //using namespace streamcorpus;
 
 // global constant variables
-const char QUERY_FILE[] = "query/simple.txt";
-//const char QUERY_FILE[] = "query/query.txt";
-//const char ALT_NAME_FILE[] = "query/alt-name.txt";
-const char ALT_NAME_FILE[] = "query/simple-alt-name.txt";
+const char QUERY_FILE[] = "query/query.txt";
+//const char QUERY_FILE[] = "query/simple.txt";
+const char ALT_NAME_FILE[] = "query/alt-name.txt";
+//const char ALT_NAME_FILE[] = "query/simple-alt-name.txt";
 const int QUERY_NUM = 170;
 const char EMPTY_STR[] = "";
 const char NA_STR[] = "N/A";

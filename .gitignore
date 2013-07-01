@@ -4,11 +4,8 @@
 *.swp
 *.cmake
 
-CMakeFiles/
 bin/
 tmp/
-debug/
+build/
 
 corpus
-Makefile
-CMakeCache.txt
