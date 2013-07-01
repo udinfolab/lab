@@ -111,10 +111,10 @@ http://en.wikipedia.org/wiki/Charles_Bronfman : Charles Rosner Bronfman
 
 http://en.wikipedia.org/wiki/Clare_Bronfman : N/A
 
-http://en.wikipedia.org/wiki/Edgar_Bronfman,_Jr. : Edgar Miles Bronfman, Jr.
+http://en.wikipedia.org/wiki/Edgar_Bronfman,_Jr. : Edgar Miles Bronfman Jr
 
-http://en.wikipedia.org/wiki/Edgar_Bronfman,_Sr. : Edgar Miles Bronfman, Sr.
-http://en.wikipedia.org/wiki/Edgar_Bronfman,_Sr. : Edgar_M._Bronfman
+http://en.wikipedia.org/wiki/Edgar_Bronfman,_Sr. : Edgar Miles Bronfman Sr
+http://en.wikipedia.org/wiki/Edgar_Bronfman,_Sr. : Edgar M Bronfman
 
 http://en.wikipedia.org/wiki/Phyllis_Lambert : Phyllis Barbara Lambert
 http://en.wikipedia.org/wiki/Phyllis_Lambert : Phyllis Barbara Bronfman
@@ -142,7 +142,7 @@ https://twitter.com/tonyg203 : Tony Gray
 https://twitter.com/urbren00 : Brent Faulkner
 
 http://en.wikipedia.org/wiki/Geoffrey_E._Hinton : Geoffrey Hinton
-http://en.wikipedia.org/wiki/Geoffrey_E._Hinton : Geoffrey_Everest_Hinton
+http://en.wikipedia.org/wiki/Geoffrey_E._Hinton : Geoffrey Everest Hinton
 
 http://en.wikipedia.org/wiki/L%C3%A9on_Bottou : Léon_Bottou
 
@@ -174,7 +174,7 @@ http://en.wikipedia.org/wiki/Fargo_Moorhead_Derby_Girls : FMDG
 http://en.wikipedia.org/wiki/George_Sinner : George Albert Sinner
 http://en.wikipedia.org/wiki/George_Sinner : George A Sinner
 
-http://en.wikipedia.org/wiki/Gretchen_Hoffman : Gretchen M. Hoffman
+http://en.wikipedia.org/wiki/Gretchen_Hoffman : Gretchen M Hoffman
 
 http://en.wikipedia.org/wiki/Jamie_Parsley : N/A
 
@@ -195,9 +195,202 @@ http://en.wikipedia.org/wiki/Ken_Fowler : N/A
 http://en.wikipedia.org/wiki/Keri_Hehn : N/A
 
 http://en.wikipedia.org/wiki/Olaus_Murie : Olaus Johan Murie
-http://en.wikipedia.org/wiki/Olaus_Murie : Olaus J. Murie
+http://en.wikipedia.org/wiki/Olaus_Murie : Olaus J Murie
 
 http://en.wikipedia.org/wiki/Paul_Johnsgard : Paul Austin Johnsgard
 
 http://en.wikipedia.org/wiki/Paul_Marquart : N/A
 
+http://en.wikipedia.org/wiki/Richard_Edlund : N/A
+
+http://en.wikipedia.org/wiki/Richard_W._Goldberg : Richard Goldberg
+
+http://en.wikipedia.org/wiki/Susan_Krieg : N/A
+
+http://en.wikipedia.org/wiki/William_P._Gerberding : William Gerberding
+
+http://en.wikipedia.org/wiki/Ana%C3%AFs_Croze : Anais Croze
+
+http://en.wikipedia.org/wiki/Gwena%C3%ABlle_Aubry : Gwenaelle Aubry
+
+http://en.wikipedia.org/wiki/Nicolas_Sch%C3%B6ffer : Nicolas Schoeffer
+
+http://en.wikipedia.org/wiki/Th%C3%A9o_Mercier : N/A
+
+http://en.wikipedia.org/wiki/Chiara_Nappi : Chiara R. Nappi
+
+http://en.wikipedia.org/wiki/Eva_Silverstein : N/A
+
+http://en.wikipedia.org/wiki/Matt_Witten : Matthew Witten
+
+http://en.wikipedia.org/wiki/Shamit_Kachru : N/A
+
+http://en.wikipedia.org/wiki/Angelo_Savoldi : Mario Fornini
+
+http://en.wikipedia.org/wiki/Bernard_Kenny : Bernard F Kenny
+
+http://en.wikipedia.org/wiki/Bob_Bert : Robert Bertelli
+
+http://en.wikipedia.org/wiki/Carl_Chang_(tennis) : N/A
+
+http://en.wikipedia.org/wiki/Carla_Katz : Carla A. Katz
+
+http://en.wikipedia.org/wiki/Derrick_Alston : Derrick Samuel Alston
+
+http://en.wikipedia.org/wiki/Frank_Winters : Frank Mitchell Winters
+
+http://en.wikipedia.org/wiki/Henry_Gutierrez : Hendrig Gutierrez
+http://en.wikipedia.org/wiki/Henry_Gutierrez : Hendrig Henry Gutierrez
+
+http://en.wikipedia.org/wiki/Jack_Lazorko : Jack Thomas Lazorko
+
+http://en.wikipedia.org/wiki/Jeff_Tamarkin : N/A
+
+http://en.wikipedia.org/wiki/Joanne_Borgella : N/A
+
+http://en.wikipedia.org/wiki/Ken_Freedman : N/A
+
+http://en.wikipedia.org/wiki/Klaus_Grutzka : Klaus Guido Grutzka
+
+http://en.wikipedia.org/wiki/Mark_SaFranko : N/A
+
+http://en.wikipedia.org/wiki/Maurice_Fitzgibbons : N/A
+
+http://en.wikipedia.org/wiki/Pat_Dapuzzo : N/A
+
+http://en.wikipedia.org/wiki/Ruben_J._Ramos : Ruben Ramos
+
+http://en.wikipedia.org/wiki/Tilo_Rivas : Tilo E Rivas
+
+http://en.wikipedia.org/wiki/William_H._Miller_(writer) : William Hughes Miller
+http://en.wikipedia.org/wiki/William_H._Miller_(writer) : William Miller
+
+http://en.wikipedia.org/wiki/Aharon_Barak : Aaron Barak
+http://en.wikipedia.org/wiki/Aharon_Barak : Aharon Brick
+
+http://en.wikipedia.org/wiki/Alex_Kapranos : Alexander Paul Kapranos Huntley
+
+http://en.wikipedia.org/wiki/Alexander_McCall_Smith : R Alexander Sandy McCall Smith
+http://en.wikipedia.org/wiki/Alexander_McCall_Smith : Alexander_McColl_Smith
+
+http://en.wikipedia.org/wiki/Annie_Laurie_Gaylor : N/A
+
+http://en.wikipedia.org/wiki/Bill_Coen : N/A
+
+http://en.wikipedia.org/wiki/Boris_Berezovsky_(businessman) : Platon_Elenin
+http://en.wikipedia.org/wiki/Boris_Berezovsky_(businessman) : Boris_A._Berezovsky
+http://en.wikipedia.org/wiki/Boris_Berezovsky_(businessman) : Boris_Abramovich_Berezovsky
+http://en.wikipedia.org/wiki/Boris_Berezovsky_(businessman) : Boris_Berezhovsky
+
+http://en.wikipedia.org/wiki/Boris_Berezovsky_(pianist) : Boris Vadimovich Berezovsky
+
+http://en.wikipedia.org/wiki/Charlie_Savage : N/A
+
+http://en.wikipedia.org/wiki/Darren_Rowse : ProBlogger
+
+http://en.wikipedia.org/wiki/Douglas_Carswell : John Douglas Wilson Carswell
+
+http://en.wikipedia.org/wiki/Frederick_M._Lawrence : Frederick Lawrence
+
+http://en.wikipedia.org/wiki/Ikuhisa_Minowa : Minowaman
+http://en.wikipedia.org/wiki/Ikuhisa_Minowa : The Punk
+http://en.wikipedia.org/wiki/Ikuhisa_Minowa : The Giant Killer
+http://en.wikipedia.org/wiki/Ikuhisa_Minowa : Tiger Mask V
+
+http://en.wikipedia.org/wiki/James_McCartney : James Louis McCartney
+
+http://en.wikipedia.org/wiki/Jim_Steyer : James Jim P Steyer
+http://en.wikipedia.org/wiki/Jim_Steyer : James P Steyer
+http://en.wikipedia.org/wiki/Jim_Steyer : James Steyer
+
+http://en.wikipedia.org/wiki/Lisa_Bloom : Lisa Read Bloom
+
+http://en.wikipedia.org/wiki/Lovebug_Starski : Love Bug Starski
+http://en.wikipedia.org/wiki/Lovebug_Starski : Love Bug Starsky
+
+http://en.wikipedia.org/wiki/Mario_Garnero : N/A
+
+http://en.wikipedia.org/wiki/Masaru_Emoto : Doctor Emoto
+
+http://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb : Nessim Nicholas Taleb
+http://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb : Nissim Nicholas Taleb
+http://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb : Nassim Taleb
+http://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb : Nessim Taleb
+http://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb : Nissim Taleb
+
+http://en.wikipedia.org/wiki/Rodrigo_Pimentel : N/A
+
+http://en.wikipedia.org/wiki/Roustam_Tariko : Rustam Tariko
+
+http://en.wikipedia.org/wiki/Ruth_Rendell : Ruth Barbara Rendell
+http://en.wikipedia.org/wiki/Ruth_Rendell : Baroness Rendell
+http://en.wikipedia.org/wiki/Ruth_Rendell : Barbara Vine
+http://en.wikipedia.org/wiki/Ruth_Rendell : Lady Rendell
+
+http://en.wikipedia.org/wiki/Satoshi_Ishii : N/A
+
+http://en.wikipedia.org/wiki/Vladimir_Potanin : Vladimir Olegovich Potanin
+
+http://en.wikipedia.org/wiki/William_Cohen : William Sebastian Cohen
+
+http://en.wikipedia.org/wiki/William_D._Cohan : William Cohan
+
+http://en.wikipedia.org/wiki/William_H._Gates,_Sr : William Henry Gates
+
+http://en.wikipedia.org/wiki/Buddy_MacKay : Kenneth Hood Buddy MacKay
+http://en.wikipedia.org/wiki/Buddy_MacKay : Kenneth Hood MacKay
+http://en.wikipedia.org/wiki/Buddy_MacKay : Kenneth H MacKay
+http://en.wikipedia.org/wiki/Buddy_MacKay : Buddy McKay
+
+http://en.wikipedia.org/wiki/Chuck_Pankow : N/A
+
+http://en.wikipedia.org/wiki/Haven_Denney : N/A
+
+http://en.wikipedia.org/wiki/Jeremy_McKinnon : Jeremy Wade McKinnon
+http://en.wikipedia.org/wiki/Jeremy_McKinnon : Jeremiah Wade McKinnon
+http://en.wikipedia.org/wiki/Jeremy_McKinnon : Jeremiah McKinnon
+
+http://en.wikipedia.org/wiki/Joey_Mantia : N/A
+
+http://en.wikipedia.org/wiki/Judd_Davis : Judd Dillon Davis
+
+http://en.wikipedia.org/wiki/Lorenzo_Williams_(basketball) : N/A
+
+http://en.wikipedia.org/wiki/Randy_Ewers : N/A
+
+http://en.wikipedia.org/wiki/Reid_Nichols : Thomas Reid Nichols
+
+http://en.wikipedia.org/wiki/Scot_Brantley : Scot Eugene Brantley
+
+http://en.wikipedia.org/wiki/Sean_Hampton : Lee Sean Hampton
+
+http://en.wikipedia.org/wiki/Travis_Mays : Travis Cortez Mays
+
+https://twitter.com/BartowMcDonald : Bartow McDonald
+https://twitter.com/BartowMcDonald : Ocala Commercial RE
+
+https://twitter.com/KentGuinn4Mayor : Kent Guinn
+
+https://twitter.com/bobplaisted : Robert Plaisted
+
+https://twitter.com/redmondmusic : Eric Redmond
+
+https://twitter.com/sandrafriend : Sandra Friend
+
+http://en.wikipedia.org/wiki/Joshua_Zetumer : N/A
+
+https://twitter.com/MissMarcel : Kelly Marcel
+
+http://en.wikipedia.org/wiki/Barbara_Liskov : Barbara Jane Huberman 
+http://en.wikipedia.org/wiki/Barbara_Liskov : Barbara H Liskov
+http://en.wikipedia.org/wiki/Barbara_Liskov : Barbara Huberman Liskov
+http://en.wikipedia.org/wiki/Barbara_Liskov : Barbara Jane Huberman
+
+http://en.wikipedia.org/wiki/Fernando_J._Corbat%C3%B3 : Fernando José "Corby" Corbató
+http://en.wikipedia.org/wiki/Fernando_J._Corbat%C3%B3 : Fernando Corbato
+http://en.wikipedia.org/wiki/Fernando_J._Corbat%C3%B3 : Fernando Corbató
+http://en.wikipedia.org/wiki/Fernando_J._Corbat%C3%B3 : Fernando J Corbato
+
+http://en.wikipedia.org/wiki/Juris_Hartmanis : N/A
+
+http://en.wikipedia.org/wiki/Shafi_Goldwasser : Shafrira Goldwasser
