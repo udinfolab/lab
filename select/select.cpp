@@ -44,8 +44,8 @@ using namespace apache::thrift::transport;
 namespace po = boost::program_options;
 
 // global constant variables
-//const char DOC_LIST_FILE[] = "query/doc-list.txt";
-const char DOC_LIST_FILE[] = "query/simple/doc-list.txt";
+const char DOC_LIST_FILE[] = "query/doc-list.txt";
+//const char DOC_LIST_FILE[] = "query/simple/doc-list.txt";
 const bool VERBOSE = true;
 
 // document list
