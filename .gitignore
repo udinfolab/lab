@@ -4,7 +4,7 @@
 *.swp
 *.cmake
 
-bin/
+bin
 tmp/
 build/
 

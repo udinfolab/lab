@@ -1,3 +1,14 @@
+/*
+ * Dump the content of stream corpus file
+ *
+ * Thanks to:
+ * https://groups.google.com/d/msg/streamcorpus/fi8Y8yseF8o/viJjiFNVLNsJ
+ *
+ * Streaming corpus is passed in through stdin, and content is passed out
+ * through stdout with stream_id and body.clean_visible fields.
+ */
+
+#include <inttypes.h>
 #include <inttypes.h>
 #include <fcntl.h>
 #include <stdio.h>
