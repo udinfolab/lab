@@ -6,7 +6,7 @@
  * https://groups.google.com/d/msg/streamcorpus/fi8Y8yseF8o/viJjiFNVLNsJ
  *
  * Streaming corpus is passed in through stdin, and filtered corpus is passed
- * out through stdout
+ * out through stdout in intact thrift format
  */
 
 #include <inttypes.h>
@@ -50,16 +50,14 @@
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
-
-namespace po = boost::program_options;
-
 //using namespace streamcorpus;
+namespace po = boost::program_options;
 
 // global constant variables
 const char QUERY_FILE[] = "query/query.txt";
-//const char QUERY_FILE[] = "query/simple.txt";
+//const char QUERY_FILE[] = "query/simple/query.txt";
 const char ALT_NAME_FILE[] = "query/alt-name.txt";
-//const char ALT_NAME_FILE[] = "query/simple-alt-name.txt";
+//const char ALT_NAME_FILE[] = "query/simple/alt-name.txt";
 const int QUERY_NUM = 170;
 const char EMPTY_STR[] = "";
 const char NA_STR[] = "N/A";
