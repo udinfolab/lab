@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 '''
 You can run this script like this using GNU Parallel:
 
@@ -38,14 +41,18 @@ def run(hour):
 
   for line in sys.stdin:
     chunk_count += 1
+    print '[%s / %d]' %(line, chunk_count)
+
     url = 'http://s3.amazonaws.com/aws-publicdatasets/' \
         'trec/kba/kba-streamcorpus-2013-v0_2_0-english-and-unknown-language' \
         + line.strip()
     cmd = '(wget -O - %s | gpg --homedir %s --no-permission-warning ' \
         '--trust-model always --output - --decrypt - | xz --decompress | ' \
-        './bin/select 1>%s) 2>> subprocess_errors.log ' % (url, gpg_dir, save_file)
-    print cmd
-    #child = subprocess.Popen(cmd, shell=True)
+        './bin/select 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
+    #print cmd
+    child = subprocess.Popen(cmd, shell=True)
+    # wait for the command to end
+    child.wait()
 
 def main():
   parser = argparse.ArgumentParser(usage=__doc__)

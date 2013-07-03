@@ -3,6 +3,7 @@
 *.log
 *.swp
 *.cmake
+*.gz
 
 bin
 tmp/
