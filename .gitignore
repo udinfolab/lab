@@ -10,4 +10,11 @@ tmp/
 build/
 hours/
 
+wrapper/bin
+wrapper/archives
+wrapper/log
+wrapper/save
+wrapper/extraction
+wrapper/query
+
 corpus

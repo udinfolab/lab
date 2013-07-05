@@ -28,8 +28,10 @@ def import_gpg():
     os.makedirs(gpg_dir)
 
   cmd = 'gpg --homedir %s --no-permission-warning --import' \
-      '%s 2> gpg_errors.log' % (gpg_dir, gpg_private)
-  gpg_child = Popen([cmd], shell=True)
+      ' %s' % (gpg_dir, gpg_private)
+  gpg_child = subprocess.Popen([cmd], shell=True)
+  gpg_child.wait()
+  print 'Done.'
 
 def run(hour):
   start_time = time.time()
@@ -48,7 +50,7 @@ def run(hour):
         + line.strip()
     cmd = '(wget -O - %s | gpg --homedir %s --no-permission-warning ' \
         '--trust-model always --output - --decrypt - | xz --decompress | ' \
-        './bin/select 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
+        './bin/filter 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
     #print cmd
     child = subprocess.Popen(cmd, shell=True)
     # wait for the command to end
@@ -57,9 +59,14 @@ def run(hour):
 def main():
   parser = argparse.ArgumentParser(usage=__doc__)
   parser.add_argument('hour')
+  parser.add_argument('--import', default=False, action='store_true',
+      dest='do_import', help='import gpg key')
   args = parser.parse_args()
 
-  run(args.hour)
+  if args.do_import:
+    import_gpg()
+  else:
+    run(args.hour)
 
 if __name__ == '__main__':
   try:
