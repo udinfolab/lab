@@ -10,9 +10,11 @@ tmp/
 build/
 hours/
 
-wrapper/bin
+wrapper/*-bin
+wrapper/map
 wrapper/archives
 wrapper/log
 wrapper/save
 wrapper/extraction
 wrapper/query
+wrapper/list

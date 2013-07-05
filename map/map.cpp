@@ -1,12 +1,10 @@
 /*
- * Apply thrift streaming filtering with query entities and their alternative
- * names.
+ * Generate the mapping bewteen the query and the stream_id.
  *
- * Thanks to:
- * https://groups.google.com/d/msg/streamcorpus/fi8Y8yseF8o/viJjiFNVLNsJ
+ * Filtered streaming corpus is passed in through stdin, and the mapping
+ * between the query and stream_id is generated
  *
- * Streaming corpus is passed in through stdin, and filtered corpus is passed
- * out through stdout in intact thrift format
+ * Copyright: Xitong Liu (xtliu@udel.edu)
  */
 
 #include <inttypes.h>
@@ -62,8 +60,8 @@ const int QUERY_NUM = 170;
 const char EMPTY_STR[] = "";
 const char NA_STR[] = "N/A";
 
-const bool VERBOSE = true;
-//const bool VERBOSE = false;
+//const bool VERBOSE = true;
+const bool VERBOSE = false;
 
 // original query list
 std::vector<std::string> g_query_vec;
@@ -79,7 +77,7 @@ std::string url2ent(std::string& url);
 std::string& trim(std::string& str);
 std::string url_encode(const std::string& url);
 std::string url_decode(const std::string& in);
-bool is_relevant(const std::string& query, const std::string& doc);
+bool is_relevant(const std::string& query, const std::string& doc, std::string& mapped);
 
 int main(int argc, char **argv) {
   // load the query
@@ -114,12 +112,6 @@ int main(int argc, char **argv) {
       new TBinaryProtocol(transportInput));
   transportInput->open();
 
-  // initialize output stream
-  boost::shared_ptr<TFDTransport> transportOutput(new TFDTransport(output_fd));
-  boost::shared_ptr<TBinaryProtocol> protocolOutput(
-      new TBinaryProtocol(transportOutput));
-  transportOutput->open();
-
   // Read and process all stream items
   streamcorpus::StreamItem stream_item;
   int cnt = 0;
@@ -142,14 +134,17 @@ int main(int argc, char **argv) {
       // search over all the query entities
       std::vector<std::string>::iterator first = g_query_vec.begin();
       std::vector<std::string>::iterator last = g_query_vec.end();
+      std::string mapped;
       while(first != last){
-        if(is_relevant(*first, doc)){
+        if(is_relevant(*first, doc, mapped)){
           if(VERBOSE){
             std::clog << "Matched: [" << stream_item.stream_id << "] ";
             std::clog << "(" << *first << ")" << std::endl;
           }
-          // save the document into the output stream
-          stream_item.write(protocolOutput.get());
+          // save the mapping to stdout
+          std::cout << stream_item.stream_id << " -- " << *first;
+          std::cout << " -- " << mapped << std::endl;
+
           ++matched;
           break;
         }
@@ -157,7 +152,6 @@ int main(int argc, char **argv) {
       }
     } catch (TTransportException e) {
       // Vital to flush the buffered output or you will lose the last one
-      transportOutput->flush();
       std::clog << "Total stream items processed: " << cnt << std::endl;
       std::clog << "Total stream items matched: " << matched << std::endl;
       break;
@@ -170,7 +164,8 @@ int main(int argc, char **argv) {
  * Given a query and string, judge whether the document is relevant w.r.t. the
  * query
  */
-bool is_relevant(const std::string& query, const std::string& doc){
+bool is_relevant(const std::string& query, const std::string& doc, 
+    std::string& mapped){
   // DEBUG ONLY
   //return true;
 
@@ -182,6 +177,7 @@ bool is_relevant(const std::string& query, const std::string& doc){
 
   // use std::string::find() to do quick sub-string based search
   if(std::string::npos != doc.find(qent)){
+    mapped = query;
     return true;
   }else{
     // we then try to match its alternative name
@@ -195,6 +191,7 @@ bool is_relevant(const std::string& query, const std::string& doc){
     std::vector<std::string>::iterator last = alt_name_vec.end();
     while(first != last){
       if(std::string::npos != doc.find(*first)){
+        mapped = *first;
         matched = true;
         break;
       }

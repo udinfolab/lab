@@ -6,6 +6,8 @@
  *
  * Streaming corpus is passed in through stdin, and content is passed out
  * through stdout with stream_id and body.clean_visible fields.
+ *
+ * Copyright: Xitong Liu (xtliu@udel.edu)
  */
 
 #include <inttypes.h>
