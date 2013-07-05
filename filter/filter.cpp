@@ -64,6 +64,7 @@ const char NA_STR[] = "N/A";
 
 //const bool VERBOSE = true;
 const bool VERBOSE = false;
+//const bool VERBOSE = false;
 
 // original query list
 std::vector<std::string> g_query_vec;
