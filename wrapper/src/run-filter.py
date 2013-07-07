@@ -50,8 +50,9 @@ def run(hour):
         + line.strip()
     cmd = '(wget -O - %s | gpg --homedir %s --no-permission-warning ' \
         '--trust-model always --output - --decrypt - | xz --decompress | ' \
-        './bin/filter 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
+        './r-bin/filter 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
     #print cmd
+
     child = subprocess.Popen(cmd, shell=True)
     # wait for the command to end
     child.wait()
