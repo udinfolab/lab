@@ -20,10 +20,9 @@ http://en.wikipedia.org/wiki/Red_River_Zoo : N/A
 http://en.wikipedia.org/wiki/Star_Lite_Motel : Starlite Motel
 http://en.wikipedia.org/wiki/Star_Lite_Motel : Charley's Motel
 
-http://en.wikipedia.org/wiki/Elysian_Charter_School : ECS
-http://en.wikipedia.org/wiki/Elysian_Charter_School : Elysian Charter School of Hoboken
+http://en.wikipedia.org/wiki/Elysian_Charter_School : N/A
 
-http://en.wikipedia.org/wiki/Stevens_Cooperative_School : SCS
+http://en.wikipedia.org/wiki/Stevens_Cooperative_School : N/A
 
 http://en.wikipedia.org/wiki/Weehawken_Cove : Hoboken's_Inner_Harbor
 http://en.wikipedia.org/wiki/Weehawken_Cove : North_Hoboken_Harbor
@@ -46,7 +45,7 @@ http://en.wikipedia.org/wiki/Eighth_Street_Elementary_School : N/A
 
 http://en.wikipedia.org/wiki/Lake_Weir_High_School : LWHS
 
-http://en.wikipedia.org/wiki/Marion_Technical_Institute : MTI
+http://en.wikipedia.org/wiki/Marion_Technical_Institute : N/A
 
 http://en.wikipedia.org/wiki/Osceola_Middle_School : N/A
 
@@ -59,7 +58,6 @@ http://en.wikipedia.org/wiki/Innovis_Health : Essentia Health
 
 http://en.wikipedia.org/wiki/Hoboken_Reporter : N/A
 
-http://en.wikipedia.org/wiki/Hoboken_Volunteer_Ambulance_Corps : HVAC
 http://en.wikipedia.org/wiki/Hoboken_Volunteer_Ambulance_Corps : Hoboken EMS
 
 http://en.wikipedia.org/wiki/Basic_Element_(company) : N/A
@@ -79,7 +77,7 @@ http://en.wikipedia.org/wiki/Dunkelvolk : N/A
 
 http://en.wikipedia.org/wiki/Gran%C3%A3_y_Montero : GraÒa y Montero
 
-http://en.wikipedia.org/wiki/Intergroup_Financial_Services : IFS
+http://en.wikipedia.org/wiki/Intergroup_Financial_Services : N/A
 
 http://en.wikipedia.org/wiki/Luz_del_Sur : LUSURC1
 
@@ -154,7 +152,7 @@ http://en.wikipedia.org/wiki/Blair_Thoreson : N/A
 
 http://en.wikipedia.org/wiki/Brenda_Weiler : N/A
 
-http://en.wikipedia.org/wiki/Carey_McWilliams_(marksman) : McWilliams
+http://en.wikipedia.org/wiki/Carey_McWilliams_(marksman) : N/A
 
 http://en.wikipedia.org/wiki/Clark_Blaise : N/A
 
@@ -286,15 +284,13 @@ http://en.wikipedia.org/wiki/Boris_Berezovsky_(pianist) : Boris Vadimovich Berez
 
 http://en.wikipedia.org/wiki/Charlie_Savage : N/A
 
-http://en.wikipedia.org/wiki/Darren_Rowse : ProBlogger
+http://en.wikipedia.org/wiki/Darren_Rowse : N/A
 
 http://en.wikipedia.org/wiki/Douglas_Carswell : John Douglas Wilson Carswell
 
 http://en.wikipedia.org/wiki/Frederick_M._Lawrence : Frederick Lawrence
 
 http://en.wikipedia.org/wiki/Ikuhisa_Minowa : Minowaman
-http://en.wikipedia.org/wiki/Ikuhisa_Minowa : The Punk
-http://en.wikipedia.org/wiki/Ikuhisa_Minowa : The Giant Killer
 http://en.wikipedia.org/wiki/Ikuhisa_Minowa : Tiger Mask V
 
 http://en.wikipedia.org/wiki/James_McCartney : James Louis McCartney

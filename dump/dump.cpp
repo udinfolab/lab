@@ -6,6 +6,8 @@
  *
  * Streaming corpus is passed in through stdin, and content is passed out
  * through stdout with stream_id and body.clean_visible fields.
+ *
+ * Copyright: Xitong Liu (xtliu@udel.edu)
  */
 
 #include <inttypes.h>
@@ -97,6 +99,7 @@ int main(int argc, char **argv) {
         std::cout << doc << std::endl;
         continue;
       }
+      std::cout << "original_url: " << stream_item.original_url << std::endl;
       std::cout << "Body (clean_visible): " << std::endl;
       std::cout << doc << std::endl;
       std::cout << "---------------------------------" << std::endl;

@@ -7,6 +7,8 @@
  *
  * Streaming corpus is passed in through stdin, and selected documents are 
  * passed out through stdout in intact thrift format.
+ *
+ * Copyright: Xitong Liu (xtliu@udel.edu)
  */
 
 #include <inttypes.h>
