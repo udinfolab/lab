@@ -4,7 +4,7 @@
 '''
 You can run this script like this using GNU Parallel:
 
-ls paths/xxx | ./parallel -j 32 --eta "cat {} | python filter-streamitems-cpp.py 1> {}.speed.log 2> {}.errors.log  {}" &> parallel.log &
+ls list/xxx | parallel -j 8 --joblog parallel.log --eta "python run-filter.py {}"
 
 The streamcorpus-counter is a program like the one posted here:
   https://groups.google.com/d/msg/streamcorpus/fi8Y8yseF8o/viJjiFNVLNsJ
@@ -41,21 +41,28 @@ def run(hour):
   save_dir = 'save/'
   save_file = save_dir + hour + '.sc'
 
-  for line in sys.stdin:
-    chunk_count += 1
-    print '[%s / %d]' %(line, chunk_count)
+  # load the path file for the specific hour
+  hour_file_path = 'hours/%s' % hour
+  try:
+    with open(hour_file_path) as f:
+      content = f.readlines()
+      for line in content:
+        chunk_count += 1
+        print '[%s / %d]' %(line, chunk_count)
 
-    url = 'http://s3.amazonaws.com/aws-publicdatasets/' \
-        'trec/kba/kba-streamcorpus-2013-v0_2_0-english-and-unknown-language' \
-        + line.strip()
-    cmd = '(wget -O - %s | gpg --homedir %s --no-permission-warning ' \
-        '--trust-model always --output - --decrypt - | xz --decompress | ' \
-        './r-bin/filter 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
-    #print cmd
+        url = 'http://s3.amazonaws.com/aws-publicdatasets/' \
+            'trec/kba/kba-streamcorpus-2013-v0_2_0-english-and-unknown-language' \
+            + line.strip()
+        cmd = '(wget -O - %s | gpg --homedir %s --no-permission-warning ' \
+            '--trust-model always --output - --decrypt - | xz --decompress | ' \
+            './bin/filter 1>>%s) 2>>log/%s ' % (url, gpg_dir, save_file, hour)
+        #print cmd
 
-    child = subprocess.Popen(cmd, shell=True)
-    # wait for the command to end
-    child.wait()
+        child = subprocess.Popen(cmd, shell=True)
+        # wait for the command to end
+        child.wait()
+  except IOError as e:
+    print 'Failed to open file: %s' % hour_file_path
 
 def main():
   parser = argparse.ArgumentParser(usage=__doc__)
